@@ -9,7 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@faker-js/faker": "^7.3.0",
+    "async": "^3.2.4",
     "mongodb": "^4.8.1",
+    "mongoose": "^6.5.1",
     "next": "12.2.4",
     "next-auth": "^4.10.3",
     "react": "18.2.0",
