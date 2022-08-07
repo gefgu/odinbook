@@ -7,9 +7,8 @@ export default async function handler(req, res) {
 
   const { userId } = req.query;
 
-  console.log(userId);
 
-  const users = await db.collection("users").find({ _id: new ObjectId(userId) }).toArray();
+  const user = await db.collection("users").find({ _id: new ObjectId(userId) }).toArray()[0];
 
-  res.status(200).json({ users });
+  res.status(200).json({ user });
 }

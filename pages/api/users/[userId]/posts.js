@@ -7,7 +7,7 @@ export default async function handler(req, res) {
 
   const { userId } = req.query;
 
-  const users = await db.collection("posts").find({ author: new ObjectId(userId) }).toArray();
+  const posts = await db.collection("posts").find({ author: new ObjectId(userId) }).toArray();
 
-  res.status(200).json({ users });
+  res.status(200).json({ posts });
 }
