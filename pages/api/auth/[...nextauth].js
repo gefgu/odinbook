@@ -9,7 +9,6 @@ export default NextAuth({
       clientId: process.env.FACEBOOK_ID,
       clientSecret: process.env.FACEBOOK_SECRET,
       profile(profile) {
-        console.log(profile);
         return {
           name: profile.name,
           image: profile.picture.data.url,
@@ -17,10 +16,12 @@ export default NextAuth({
           friendshipRequests: [],
           id: profile.id,
           email: profile.email,
+          facebookId: profile.id,
         };
       },
     }),
   ],
   debug: false,
   adapter: MongoDBAdapter(clientPromise),
+  session: { strategy: "jwt" },
 });
