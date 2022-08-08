@@ -5,14 +5,19 @@ export default function SignIn({ providers }) {
   return (
     <>
       <HeadData />
-      ABC
-      {Object.values(providers).map((provider) => (
-        <div key={provider.name}>
-          <button onClick={() => signIn(provider.id)}>
-            Sign in with {provider.name}
-          </button>
+      <main>
+        <h1>Odinbook</h1>
+        <h2>Connect with friends and the world around you on Odinbook</h2>
+        <div>
+          {Object.values(providers).map((provider) => (
+            <div key={provider.name}>
+              <button onClick={() => signIn(provider.id)}>
+                Sign in with {provider.name}
+              </button>
+            </div>
+          ))}
         </div>
-      ))}
+      </main>
     </>
   );
 }
