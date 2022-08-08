@@ -1,14 +1,10 @@
-import Head from "next/head";
 import { getProviders, signIn } from "next-auth/react";
+import HeadData from "../../components/HeadData";
 
 export default function SignIn({ providers }) {
   return (
     <>
-      <Head>
-        <title>Odinbook</title>
-        <meta name="description" content="Odinbook" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <HeadData />
       ABC
       {Object.values(providers).map((provider) => (
         <div key={provider.name}>
