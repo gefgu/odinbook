@@ -9,6 +9,7 @@ export default NextAuth({
       clientId: process.env.FACEBOOK_ID,
       clientSecret: process.env.FACEBOOK_SECRET,
       profile(profile) {
+        console.log(profile);
         return {
           name: profile.name,
           image: profile.picture.data.url,
@@ -24,4 +25,12 @@ export default NextAuth({
   debug: false,
   adapter: MongoDBAdapter(clientPromise),
   session: { strategy: "jwt" },
+  pages: {
+    signIn: "/auth/signin",
+  },
+  callbacks: {
+    async redirect({ url, baseUrl }) {
+      return baseUrl;
+    },
+  },
 });
