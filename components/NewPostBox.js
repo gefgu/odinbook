@@ -7,7 +7,7 @@ export default function NavBar() {
 
   return (
     <div className={styles.container}>
-      <form className={styles.form}>
+      <form className={styles.form} method="POST" action="/api/posts">
         <div className={styles.flex}>
           <Image
             src={session?.user.image}
@@ -24,6 +24,7 @@ export default function NavBar() {
             }?`}
             className={styles.textarea}
             rows={4}
+            required
           ></textarea>
         </div>
         <div className={styles.right}>

@@ -1,6 +1,7 @@
 import { ObjectId } from "mongodb";
 import { getToken } from "next-auth/jwt";
 import clientPromise from "../../../lib/mongodb";
+import { createPost } from "../../../lib/mongodbHelpers";
 
 export default async function handler(req, res) {
   const client = await clientPromise;
@@ -16,18 +17,30 @@ export default async function handler(req, res) {
       .toArray()
   )[0];
 
-  const userFriends = user.friends;
+  if (req.method === "GET") {
+    const userFriends = user.friends;
 
-  const usersToCheck = userFriends
-    .concat(userId)
-    .map((data) => new ObjectId(data));
+    const usersToCheck = userFriends
+      .concat(userId)
+      .map((data) => new ObjectId(data));
 
-  const posts = await db
-    .collection("posts")
-    .find({
-      author: usersToCheck,
-    })
-    .toArray();
+    const posts = await db
+      .collection("posts")
+      .find({
+        author: usersToCheck,
+      })
+      .toArray();
 
-  res.status(200).json({ posts });
+    return res.status(200).json({ posts });
+  } else if (req.method === "POST") {
+    const post = createPost(req.body.content, user);
+
+    const result = await db.collection("posts").insertOne(post);
+
+    console.log(result);
+
+    return res.status(200).redirect(req.headers.referer);
+  }
+
+  return res.status(500).json("ERROR");
 }
