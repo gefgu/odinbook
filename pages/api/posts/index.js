@@ -1,9 +1,10 @@
 import { ObjectId } from "mongodb";
 import { getToken } from "next-auth/jwt";
+import Post from "../../../lib/models/Post";
 import clientPromise from "../../../lib/mongodb";
-import { createPost } from "../../../lib/mongodbHelpers";
+import connectDB from "../../../middleware/mongodb";
 
-export default async function handler(req, res) {
+async function handler(req, res) {
   const client = await clientPromise;
   const db = client.db(process.env.MONGODB_DB);
   const token = await getToken({ req });
@@ -33,14 +34,17 @@ export default async function handler(req, res) {
 
     return res.status(200).json({ posts });
   } else if (req.method === "POST") {
-    const post = createPost(req.body.content, user);
+    try {
+      const post = new Post({ content: req.body.content, author: user });
 
-    const result = await db.collection("posts").insertOne(post);
-
-    console.log(result);
-
-    return res.status(200).redirect(req.headers.referer);
+      await post.save();
+      return res.status(200).json({ post });
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   return res.status(500).json("ERROR");
 }
+
+export default connectDB(handler);

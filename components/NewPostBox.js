@@ -2,12 +2,36 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import styles from "../styles/NewPostBox.module.css";
 
-export default function NavBar() {
+export default function NewPostBox() {
   const { data: session } = useSession();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const data = { content: event.target.content.value };
+
+    const JSONdata = JSON.stringify(data);
+
+    const endpoint = "/api/posts";
+
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      body: JSONdata,
+    };
+
+    
+    const response = await fetch(endpoint, options);
+
+    const result = await response.json();
+  };
 
   return (
     <div className={styles.container}>
-      <form className={styles.form} method="POST" action="/api/posts">
+      <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.flex}>
           <Image
             src={session?.user.image}
