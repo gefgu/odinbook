@@ -1,50 +1,37 @@
-import { ObjectId } from "mongodb";
 import { getToken } from "next-auth/jwt";
-import Post from "../../../lib/models/Post";
-import clientPromise from "../../../lib/mongodb";
 import connectDB from "../../../middleware/mongodb";
 
 async function handler(req, res) {
-  const client = await clientPromise;
-  const db = client.db(process.env.MONGODB_DB);
   const token = await getToken({ req });
 
   const userId = token.sub;
 
-  const user = (
-    await db
-      .collection("users")
-      .find({ _id: new ObjectId(userId) })
-      .toArray()
-  )[0];
+  try {
+    const user = await req.models.User.findById(userId);
+    if (req.method === "GET") {
+      const userFriends = user.friends;
 
-  if (req.method === "GET") {
-    const userFriends = user.friends;
+      const usersToCheck = userFriends.concat(userId);
 
-    const usersToCheck = userFriends
-      .concat(userId)
-      .map((data) => new ObjectId(data));
-
-    const posts = await db
-      .collection("posts")
-      .find({
+      const posts = await req.models.Post.find({
         author: usersToCheck,
-      })
-      .toArray();
+      }).populate("author");
 
-    return res.status(200).json({ posts });
-  } else if (req.method === "POST") {
-    try {
-      const post = new Post({ content: req.body.content, author: user });
+      return res.status(200).json({ posts });
+    } else if (req.method === "POST") {
+      const post = new req.models.Post({
+        content: req.body.content,
+        author: user,
+      });
 
       await post.save();
       return res.status(200).json({ post });
-    } catch (e) {
-      console.error(e);
     }
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
   }
 
-  return res.status(500).json("ERROR");
+  return res.status(500).send("Something is wrong...");
 }
 
 export default connectDB(handler);

@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
+import Post from "../lib/models/Post";
+import Comment from "../lib/models/Comment";
+import User from "../lib/models/User";
 
 const connectDB = (handler) => async (req, res) => {
+  req.models = { Post, Comment, User };
   if (mongoose.connections[0].readyState) {
     return handler(req, res);
   }
@@ -9,6 +13,7 @@ const connectDB = (handler) => async (req, res) => {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
+
 
   return handler(req, res);
 };
