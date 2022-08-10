@@ -29,7 +29,7 @@ export default function NewPostBox() {
     const result = await response.json();
   };
 
-  return (
+  return ( session &&
     <div className={styles.container}>
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.flex}>
