@@ -4,7 +4,7 @@ import utils from "../styles/utils.module.css";
 import styles from "../styles/PostBox.module.css";
 import LikeBox from "./LikeBox";
 
-export default function PostBox({ post }) {
+export default function PostBox({ post, update }) {
   post.sinceCreation = getSinceDateUntilNow(post.creationDate);
 
   return (
@@ -30,7 +30,7 @@ export default function PostBox({ post }) {
       </div>
       {post.likes.length === 1 && <p>{post.likes.length} Like</p>}
       {post.likes.length > 1 && <p>{post.likes.length} Likes</p>}
-      <LikeBox post={post} />
+      <LikeBox post={post} update={update} />
     </div>
   );
 }
