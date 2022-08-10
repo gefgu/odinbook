@@ -28,6 +28,8 @@ export default function PostBox({ post }) {
           <p key={index}>{paragraph}</p>
         ))}
       </div>
+      {post.likes.length === 1 && <p>{post.likes.length} Like</p>}
+      {post.likes.length > 1 && <p>{post.likes.length} Likes</p>}
       <LikeBox post={post} />
     </div>
   );
