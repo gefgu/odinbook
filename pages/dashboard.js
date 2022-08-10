@@ -13,7 +13,7 @@ export default function Dashboard() {
 
   return (
     <div className={styles.container}>
-      <NewPostBox />
+      <NewPostBox update={mutate} />
       <PostsListing posts={data?.posts} update={mutate} />
     </div>
   );
