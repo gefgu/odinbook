@@ -1,5 +1,6 @@
 import useSWR from "swr";
 import PostBox from "./PostBox";
+import styles from "../styles/PostListing.module.css";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -10,7 +11,7 @@ export default function PostsListing() {
   if (!data) return <div>Loading...</div>;
 
   return (
-    <div>
+    <div className={styles.container}>
       {data.posts.map((post) => (
         <PostBox key={post._id} post={post} />
       ))}
