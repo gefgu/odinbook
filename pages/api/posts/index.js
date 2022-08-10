@@ -15,7 +15,7 @@ async function handler(req, res) {
 
       const posts = await req.models.Post.find({
         author: usersToCheck,
-      }).populate("author");
+      }).populate("author").sort("-creationDate");
 
       return res.status(200).json({ posts });
     } else if (req.method === "POST") {
