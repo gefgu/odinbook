@@ -1194,6 +1194,11 @@
   dependencies:
     "yallist" "^4.0.0"
 
+"luxon@^3.0.1":
+  "integrity" "sha512-hF3kv0e5gwHQZKz4wtm4c+inDtyc7elkanAsBq+fundaCdUBNJB1dHEGUZIM6SfSBUlbVFduPwEtNjFK8wLtcw=="
+  "resolved" "https://registry.npmjs.org/luxon/-/luxon-3.0.1.tgz"
+  "version" "3.0.1"
+
 "memory-pager@^1.0.2":
   "integrity" "sha512-ZS4Bp4r/Zoeq6+NLJpP+0Zzm0pR8whtGPf1XExKLJBAczGMnSi3It14OiNCStjQjM6NU1okjQGSxgEZN8eBYKg=="
   "resolved" "https://registry.npmjs.org/memory-pager/-/memory-pager-1.5.0.tgz"

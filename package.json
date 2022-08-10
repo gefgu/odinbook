@@ -12,6 +12,7 @@
     "@faker-js/faker": "^7.3.0",
     "@next-auth/mongodb-adapter": "^1.0.4",
     "async": "^3.2.4",
+    "luxon": "^3.0.1",
     "mongodb": "^4.8.1",
     "mongoose": "^6.5.1",
     "next": "12.2.4",

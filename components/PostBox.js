@@ -1,6 +1,11 @@
 import Image from "next/image";
+import { getSinceDateUntilNow } from "../lib/helpers";
 
 export default function PostBox({ post }) {
+  post.sinceCreation = getSinceDateUntilNow(post.creationDate);
+
+  console.log(post.sinceCreation);
+
   return (
     <div>
       <div>
@@ -12,7 +17,7 @@ export default function PostBox({ post }) {
           height={50}
         />
         <strong>{post.author.name}</strong> posted.
-        <p>{post.creationDate}</p>
+        <p>{post.sinceCreation}</p>
       </div>
       <div>
         {post.content.split("\n").map((paragraph, index) => (
