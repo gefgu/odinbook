@@ -28,7 +28,7 @@ export default function PostBox({ post }) {
           <p key={index}>{paragraph}</p>
         ))}
       </div>
-      <LikeBox />
+      <LikeBox post={post} />
     </div>
   );
 }
