@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.commentBox {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+.content {
+  margin: 0 6px 0 16px;
+  background-color: #f0f2f5;
+  padding: 12px;
+  border-radius: 16px;
+  text-align: justify;
+}
+
+.content p {
+  margin: 4px 0;
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment .date {
+  align-self: flex-end;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Remember to return your map */
