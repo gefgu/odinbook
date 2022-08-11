@@ -6,8 +6,6 @@ import styles from "../styles/LikeBox.module.css";
 export default function LikeBox({ post, update }) {
   const { data: session } = useSession();
 
-  console.log(session);
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -27,7 +25,11 @@ export default function LikeBox({ post, update }) {
     session && (
       <div className={styles.container}>
         <form onSubmit={handleSubmit}>
-          <button>
+          <button
+            className={
+              post.likes.includes(session?.user.id) ? styles.liked : ""
+            }
+          >
             <Image src={thumbs} alt="Thumbs up" width={30} height={30} /> Like
           </button>
         </form>

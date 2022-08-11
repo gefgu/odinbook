@@ -14,3 +14,16 @@
   border: none;
   font-weight: bold;
 }
+
+.liked {
+  background-color: #17A9FD;
+  color: white;
+}
+
+.liked:hover {
+  background-color: #149be9;
+}
+
+.liked:active {
+  background-color: #128fd8;
+}
