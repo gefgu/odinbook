@@ -4,6 +4,7 @@ import home from "../public/home.png";
 import people from "../public/account-multiple.png";
 import { useSession } from "next-auth/react";
 import styles from "../styles/navbar.module.css";
+import Link from "next/link";
 
 export default function NavBar() {
   const { data: session } = useSession();
@@ -20,16 +21,20 @@ export default function NavBar() {
         />
         <nav>
           <ul className={styles.list}>
-            <li>
-              <button className={styles.active}>
-                <Image src={home} alt="Home Page" width={40} height={40} />
-              </button>
-            </li>
-            <li>
-              <button>
-                <Image src={people} alt="Friends" width={40} height={40} />
-              </button>
-            </li>
+            <Link href={"/dashboard"}>
+              <li>
+                <button className={styles.active}>
+                  <Image src={home} alt="Home Page" width={40} height={40} />
+                </button>
+              </li>
+            </Link>
+            <Link href={"/users"}>
+              <li>
+                <button>
+                  <Image src={people} alt="Friends" width={40} height={40} />
+                </button>
+              </li>
+            </Link>
           </ul>
         </nav>
         <Image
