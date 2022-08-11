@@ -1,4 +1,3 @@
-
 import useSWR from "swr";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
@@ -9,9 +8,7 @@ export default function Dashboard() {
   if (error) return <div>Failed to load</div>;
   if (!data) return <div>Loading...</div>;
 
-  return (
-    <div>
-      ABC
-    </div>
-  );
+  console.log(data.users);
+
+  return <div>ABC</div>;
 }

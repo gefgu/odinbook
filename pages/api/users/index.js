@@ -1,10 +1,18 @@
-import clientPromise from "../../../lib/mongodb";
+import connectDB from "../../../middleware/mongodb";
 
-export default async function handler(req, res) {
-  const client = await clientPromise;
-  const db = client.db(process.env.MONGODB_DB);
+async function handler(req, res) {
 
-  const users = await db.collection("users").find({}).toArray();
+  try {
+    if (req.method === "GET") {
+      const users = await req.models.User.find({});
 
-  res.status(200).json({ users });
+      return res.status(200).json({ users });
+    }
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+
+  return res.status(500).send("Something is wrong...");
 }
+
+export default connectDB(handler);
