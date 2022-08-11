@@ -18,8 +18,6 @@ export default function CommentBox({ post }) {
 
   const comments = data.comments;
 
-  console.log(comments);
-
   return (
     <div className={styles.container}>
       {comments &&
