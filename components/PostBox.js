@@ -3,6 +3,7 @@ import { getSinceDateUntilNow } from "../lib/helpers";
 import utils from "../styles/utils.module.css";
 import styles from "../styles/PostBox.module.css";
 import LikeBox from "./LikeBox";
+import CommentBox from "./CommentBox";
 
 export default function PostBox({ post, update }) {
   post.sinceCreation = getSinceDateUntilNow(post.creationDate);
@@ -31,6 +32,7 @@ export default function PostBox({ post, update }) {
       {post.likes.length === 1 && <p>{post.likes.length} Like</p>}
       {post.likes.length > 1 && <p>{post.likes.length} Likes</p>}
       <LikeBox post={post} update={update} />
+      <CommentBox post={post}/>
     </div>
   );
 }
