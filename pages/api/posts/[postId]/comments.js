@@ -9,7 +9,9 @@ async function handler(req, res) {
 
   try {
     if (req.method === "GET") {
-      const comments = await req.models.Comment.find({ post: postId });
+      const comments = await req.models.Comment.find({ post: postId }).populate(
+        "author"
+      );
 
       return res.status(200).json({ comments });
     } else if (req.method === "POST") {
@@ -21,7 +23,6 @@ async function handler(req, res) {
 
       await comment.save();
 
-      console.log("CHERE");
       return res.status(200).json({ comment });
     }
   } catch (error) {
