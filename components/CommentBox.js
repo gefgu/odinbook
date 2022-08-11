@@ -1,4 +1,5 @@
 import useSWR from "swr";
+import NewCommentBox from "./NewCommentBox";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -13,5 +14,9 @@ export default function CommentBox({ post }) {
 
   const comments = data.comments;
 
-  return <div>ABC</div>;
+  return (
+    <div>
+      <NewCommentBox update={mutate} />
+    </div>
+  );
 }
