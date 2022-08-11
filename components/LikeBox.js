@@ -6,6 +6,8 @@ import styles from "../styles/LikeBox.module.css";
 export default function LikeBox({ post, update }) {
   const { data: session } = useSession();
 
+  console.log(session);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
