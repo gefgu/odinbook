@@ -32,5 +32,17 @@ export default NextAuth({
     async redirect({ url, baseUrl }) {
       return baseUrl;
     },
+    session: async ({ session, token }) => {
+      if (session?.user) {
+        session.user.id = token.sub;
+      }
+      return session;
+    },
+    jwt: async ({ user, token }) => {
+      if (user) {
+        token.uid = user.id;
+      }
+      return token;
+    },
   },
 });

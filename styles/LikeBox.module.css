@@ -1,0 +1,29 @@
+.container {
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 8px 0;
+}
+
+.container button {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 8px;
+  border: none;
+  font-weight: bold;
+}
+
+.liked {
+  background-color: #17A9FD;
+  color: white;
+}
+
+.liked:hover {
+  background-color: #149be9;
+}
+
+.liked:active {
+  background-color: #128fd8;
+}

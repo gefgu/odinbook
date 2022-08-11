@@ -2,11 +2,10 @@ import Image from "next/image";
 import { getSinceDateUntilNow } from "../lib/helpers";
 import utils from "../styles/utils.module.css";
 import styles from "../styles/PostBox.module.css";
+import LikeBox from "./LikeBox";
 
-export default function PostBox({ post }) {
+export default function PostBox({ post, update }) {
   post.sinceCreation = getSinceDateUntilNow(post.creationDate);
-
-  console.log(post.sinceCreation);
 
   return (
     <div className={styles.container}>
@@ -29,6 +28,9 @@ export default function PostBox({ post }) {
           <p key={index}>{paragraph}</p>
         ))}
       </div>
+      {post.likes.length === 1 && <p>{post.likes.length} Like</p>}
+      {post.likes.length > 1 && <p>{post.likes.length} Likes</p>}
+      <LikeBox post={post} update={update} />
     </div>
   );
 }
