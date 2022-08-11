@@ -30,7 +30,8 @@ export default function LikeBox({ post, update }) {
               post.likes.includes(session?.user.id) ? styles.liked : ""
             }
           >
-            <Image src={thumbs} alt="Thumbs up" width={30} height={30} /> Like
+            <Image src={thumbs} alt="Thumbs up" width={30} height={30} />{" "}
+            {post.likes.includes(session?.user.id) ? "Unlike" : "Like"}
           </button>
         </form>
       </div>
