@@ -16,7 +16,7 @@ export default function CommentBox({ post }) {
 
   return (
     <div>
-      <NewCommentBox update={mutate} />
+      <NewCommentBox update={mutate} post={post} />
     </div>
   );
 }

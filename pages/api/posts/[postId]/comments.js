@@ -12,6 +12,17 @@ async function handler(req, res) {
       const comments = await req.models.Comment.find({ post: postId });
 
       return res.status(200).json({ comments });
+    } else if (req.method === "POST") {
+      const comment = new req.models.Comment({
+        content: req.body.content,
+        author: userId,
+        post: postId,
+      });
+
+      await comment.save();
+
+      console.log("CHERE");
+      return res.status(200).json({ comment });
     }
   } catch (error) {
     return res.status(500).json({ error: error.message });
