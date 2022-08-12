@@ -8,11 +8,38 @@
 }
 
 .userBox {
-  padding: 32px;
+  padding: 24px;
   border-radius: 8px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.25);
   border: 1px solid rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 8px;
+}
+
+.userBox button {
+  padding: 8px 12px;
+}
+
+.userBox p {
+  font-size: 1rem;
+  text-align: center;
+}
+
+.userBox button {
+  padding: 6px 12px;
+  background-color: #0165e1;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.userBox button:hover {
+  background-color: #0057c2;
+}
+
+.userBox button:active {
+  background-color: #00479e;
 }
