@@ -1,6 +1,7 @@
 import Image from "next/image";
 import useSWR from "swr";
 import utils from "../styles/utils.module.css";
+import styles from "../styles/UserListing.module.css";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -13,9 +14,9 @@ export default function Dashboard() {
   const users = data.users;
 
   return (
-    <div>
+    <div className={styles.container}>
       {users.map((user) => (
-        <div key={user._id}>
+        <div key={user._id} className={styles.userBox}>
           <Image
             src={user.image}
             className={utils.rounded}
