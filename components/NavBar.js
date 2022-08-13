@@ -2,12 +2,15 @@ import Image from "next/image";
 import odin from "../public/odin.png";
 import home from "../public/home.png";
 import people from "../public/account-multiple.png";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import styles from "../styles/navbar.module.css";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function NavBar() {
   const { data: session } = useSession();
+
+  const [showDropbox, setShowDropbox] = useState(false);
 
   return (
     session && (
@@ -37,14 +40,23 @@ export default function NavBar() {
             </Link>
           </ul>
         </nav>
-        <Image
-          src={session?.user.image}
-          className={styles.rounded}
-          alt="Profile"
-          layout="fixed"
-          width={50}
-          height={50}
-        />
+        <div className={styles.imageBox}>
+          <button className={styles.imageButton} onClick={() => setShowDropbox(!showDropbox)}>
+            <Image
+              src={session.user.image}
+              className={styles.rounded}
+              alt="Profile"
+              layout="fixed"
+              width={50}
+              height={50}
+            />
+          </button>
+          <div
+            className={`${styles.dropbox} ${showDropbox ? "" : styles.hidden}`}
+          >
+            <button onClick={() => signOut()}>Sign out</button>
+          </div>
+        </div>
       </header>
     )
   );

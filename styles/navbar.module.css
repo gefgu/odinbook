@@ -1,5 +1,5 @@
 .container {
-  padding: 0 24px;
+  padding: 0 36px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -34,4 +34,45 @@
 
 .rounded {
   border-radius: 100%;
+}
+
+.imageBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 96px;
+}
+
+.imageBox .imageButton {
+  border: none;
+  width: 100%;
+  background-color: white;
+}
+
+.imageBox .imageButton:hover {
+  background-color: rgb(231, 231, 231);
+}
+
+.imageBox .imageButton:active {
+  background-color: rgb(201, 201, 201);
+}
+
+.hidden {
+  display: none !important;
+}
+
+.dropbox {
+  position: absolute;
+  width: 100%;
+  top: 56px;
+  display: flex;
+  padding: 16px 8px;
+  background-color: white;
+}
+
+.dropbox button {
+  width: 100%;
+  padding: 4px;
+  border-radius: 8px;
 }
