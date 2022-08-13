@@ -2,10 +2,14 @@ import Image from "next/image";
 import useSWR from "swr";
 import utils from "../styles/utils.module.css";
 import styles from "../styles/UserListing.module.css";
+import { useSession } from "next-auth/react";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function Dashboard() {
+  const { status } = useSession({
+    required: true,
+  });
   const { data, mutate, error } = useSWR("/api/users", fetcher);
 
   if (error) return <div>Failed to load</div>;

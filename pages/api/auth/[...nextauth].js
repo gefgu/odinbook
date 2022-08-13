@@ -26,10 +26,11 @@ export default NextAuth({
   session: { strategy: "jwt" },
   pages: {
     signIn: "/auth/signin",
+    newUser: "/dashboard",
   },
   callbacks: {
     async redirect({ url, baseUrl }) {
-      return baseUrl;
+      return `${baseUrl}/dashboard`;
     },
     session: async ({ session, token }) => {
       if (session?.user) {
