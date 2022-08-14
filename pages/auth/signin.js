@@ -6,6 +6,7 @@ export default function SignIn({ providers }) {
   console.log(providers);
 
   const facebook = providers.facebook;
+  const credentials = providers.credentials;
 
   return (
     <>
@@ -18,7 +19,20 @@ export default function SignIn({ providers }) {
           </h2>
         </div>
         <div className={styles.box}>
-
+          {credentials && (
+            <form className={styles.credsForm}>
+              <label>
+                Name
+                <input name="name" type="text" placeholder="Your Name" />
+              </label>
+              <label>
+                Email
+                <input name="email" type="email" placeholder="Your Email" />
+              </label>
+              <button className={styles.button}>Login</button>
+            </form>
+          )}
+          <hr />
           {facebook && (
             <div>
               <button
