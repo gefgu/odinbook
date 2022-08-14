@@ -3,7 +3,11 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ["platform-lookaside.fbsbx.com", "cloudflare-ipfs.com"],
+    domains: [
+      "platform-lookaside.fbsbx.com",
+      "cloudflare-ipfs.com",
+      "picsum.photos",
+    ],
   },
 };
 

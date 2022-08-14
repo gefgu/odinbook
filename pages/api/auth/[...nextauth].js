@@ -22,14 +22,24 @@ export default NextAuth({
       },
     }),
     CredentialsProvider({
-      name: "Credentials",
-      credentials: {
-        name: { label: "Name", type: "text", placeholder: "Your name" },
-        email: { label: "Email", type: "email" },
-      },
       async authorize(credentials, req) {
-        console.log(credentials);
-        return null;
+        const data = { name: req.body.name, email: req.body.email };
+
+        const JSONdata = JSON.stringify(data);
+
+        const endpoint = `${req.headers.origin}/api/users`;
+
+        const options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSONdata,
+        };
+        const response = await fetch(endpoint, options);
+        const { user } = await response.json();
+
+        return user;
       },
     }),
   ],

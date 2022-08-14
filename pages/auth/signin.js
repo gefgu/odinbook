@@ -36,7 +36,12 @@ export default function SignIn({ providers }) {
               </label>
               <label>
                 Email
-                <input name="email" type="email" placeholder="Your Email" />
+                <input
+                  name="email"
+                  type="email"
+                  placeholder="Your Email"
+                  required
+                />
               </label>
               <button className={styles.button}>Login</button>
             </form>
