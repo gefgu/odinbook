@@ -3,10 +3,19 @@ import HeadData from "../../components/HeadData";
 import styles from "../../styles/signin.module.css";
 
 export default function SignIn({ providers }) {
-  console.log(providers);
-
   const facebook = providers.facebook;
   const credentials = providers.credentials;
+
+  const handleCredentialsForm = (event) => {
+    event.preventDefault();
+
+    const data = {
+      name: event.target.name.value,
+      email: event.target.email.value,
+    };
+
+    signIn("credentials", data);
+  };
 
   return (
     <>
@@ -20,7 +29,7 @@ export default function SignIn({ providers }) {
         </div>
         <div className={styles.box}>
           {credentials && (
-            <form className={styles.credsForm}>
+            <form className={styles.credsForm} onSubmit={handleCredentialsForm}>
               <label>
                 Name
                 <input name="name" type="text" placeholder="Your Name" />

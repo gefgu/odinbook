@@ -2,6 +2,7 @@ import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import NextAuth from "next-auth/next";
 import FacebookProvider from "next-auth/providers/facebook";
 import clientPromise from "../../../lib/mongodb";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 export default NextAuth({
   providers: [
@@ -20,8 +21,19 @@ export default NextAuth({
         };
       },
     }),
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        name: { label: "Name", type: "text", placeholder: "Your name" },
+        email: { label: "Email", type: "email" },
+      },
+      async authorize(credentials, req) {
+        console.log(credentials);
+        return null;
+      },
+    }),
   ],
-  debug: false,
+  debug: true,
   adapter: MongoDBAdapter(clientPromise),
   session: { strategy: "jwt" },
   pages: {
