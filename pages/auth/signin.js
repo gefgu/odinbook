@@ -3,6 +3,10 @@ import HeadData from "../../components/HeadData";
 import styles from "../../styles/signin.module.css";
 
 export default function SignIn({ providers }) {
+  console.log(providers);
+
+  const facebook = providers.facebook;
+
   return (
     <>
       <HeadData />
@@ -14,16 +18,17 @@ export default function SignIn({ providers }) {
           </h2>
         </div>
         <div className={styles.box}>
-          {Object.values(providers).map((provider) => (
-            <div key={provider.name}>
+
+          {facebook && (
+            <div>
               <button
                 className={styles.button}
-                onClick={() => signIn(provider.id)}
+                onClick={() => signIn(facebook.id)}
               >
-                Sign in with {provider.name}
+                Sign in with Facebook
               </button>
             </div>
-          ))}
+          )}
         </div>
       </main>
     </>
