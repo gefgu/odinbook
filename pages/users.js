@@ -23,7 +23,7 @@ export default function Dashboard() {
         <div key={user._id} className={styles.userBox}>
           <Image
             src={user.image}
-            className={utils.rounded}
+            className={utils.roundedImage}
             alt="Profile"
             layout="fixed"
             width={75}

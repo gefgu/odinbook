@@ -13,7 +13,7 @@ export default function PostBox({ post, update }) {
       <div className={styles.horizontalCenter}>
         <Image
           src={post.author.image}
-          className={utils.rounded}
+          className={utils.roundedImage}
           alt="Profile"
           layout="fixed"
           width={50}

@@ -10,8 +10,8 @@ export default function SignIn({ providers }) {
     event.preventDefault();
 
     const data = {
-      name: event.target.name.value,
-      email: event.target.email.value,
+      name: "Example User",
+      email: "example@example.com",
     };
 
     signIn("credentials", data);
@@ -30,20 +30,7 @@ export default function SignIn({ providers }) {
         <div className={styles.box}>
           {credentials && (
             <form className={styles.credsForm} onSubmit={handleCredentialsForm}>
-              <label>
-                Name
-                <input name="name" type="text" placeholder="Your Name" />
-              </label>
-              <label>
-                Email
-                <input
-                  name="email"
-                  type="email"
-                  placeholder="Your Email"
-                  required
-                />
-              </label>
-              <button className={styles.button}>Login</button>
+              <button className={styles.button}>Guest Sign-in</button>
             </form>
           )}
           <hr />

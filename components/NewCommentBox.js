@@ -36,7 +36,7 @@ export default function NewCommentBox({ update, post }) {
         <form className={styles.form} onSubmit={handleSubmit}>
           <Image
             src={session?.user.image}
-            className={utils.rounded}
+            className={utils.roundedImage}
             alt="Profile"
             layout="fixed"
             width={50}

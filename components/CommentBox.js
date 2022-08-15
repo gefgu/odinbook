@@ -27,7 +27,7 @@ export default function CommentBox({ post }) {
             <div key={comment._id} className={styles.commentBox}>
               <Image
                 src={comment.author.image}
-                className={utils.rounded}
+                className={utils.roundedImage}
                 alt="Profile"
                 layout="fixed"
                 width={50}

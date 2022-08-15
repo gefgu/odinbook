@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import styles from "../styles/NewPostBox.module.css";
+import utils from "../styles/utils.module.css";
 
 export default function NewPostBox({ update }) {
   const { data: session } = useSession();
@@ -37,7 +38,7 @@ export default function NewPostBox({ update }) {
           <div className={styles.flex}>
             <Image
               src={session?.user.image}
-              className={styles.rounded}
+              className={utils.roundedImage}
               alt="Profile"
               layout="fixed"
               width={50}
@@ -45,9 +46,7 @@ export default function NewPostBox({ update }) {
             />
             <textarea
               name="content"
-              placeholder={`What's on your mind, ${
-                session?.user.name.split(" ")[0]
-              }?`}
+              placeholder={`What's on your mind, ${session?.user.name}?`}
               className={styles.textarea}
               rows={4}
               required

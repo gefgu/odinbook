@@ -6,6 +6,7 @@ import { signOut, useSession } from "next-auth/react";
 import styles from "../styles/navbar.module.css";
 import Link from "next/link";
 import { useState } from "react";
+import utils from "../styles/utils.module.css";
 
 export default function NavBar() {
   const { data: session } = useSession();
@@ -41,10 +42,13 @@ export default function NavBar() {
           </ul>
         </nav>
         <div className={styles.imageBox}>
-          <button className={styles.imageButton} onClick={() => setShowDropbox(!showDropbox)}>
+          <button
+            className={styles.imageButton}
+            onClick={() => setShowDropbox(!showDropbox)}
+          >
             <Image
               src={session.user.image}
-              className={styles.rounded}
+              className={utils.roundedImage}
               alt="Profile"
               layout="fixed"
               width={50}
