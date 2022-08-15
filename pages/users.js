@@ -7,32 +7,43 @@ import { useSession } from "next-auth/react";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function Dashboard() {
-  const { status } = useSession({
+  const { status, ...sessionData } = useSession({
     required: true,
   });
-  const { data, mutate, error } = useSWR("/api/users", fetcher);
+  const userInfo = sessionData?.data?.user;
+  const { ...userListingData } = useSWR("/api/users", fetcher);
+  const { ...friendshipRequestsData } = useSWR(
+    "/api/users/friendshipRequests",
+    fetcher
+  );
 
-  if (error) return <div>Failed to load</div>;
-  if (!data) return <div>Loading...</div>;
+  if (userListingData.error || friendshipRequestsData.error)
+    return <div>Failed to load</div>;
+  if (!userListingData.data || !friendshipRequestsData.data)
+    return <div>Loading...</div>;
 
-  const users = data.users;
+  const users = userListingData.data.users;
 
   return (
-    <div className={styles.container}>
-      {users.map((user) => (
-        <div key={user._id} className={styles.userBox}>
-          <Image
-            src={user.image}
-            className={utils.roundedImage}
-            alt="Profile"
-            layout="fixed"
-            width={75}
-            height={75}
-          />
-          <p>{user.name}</p>
-          <button>Request Friendship</button>
-        </div>
-      ))}
-    </div>
+    userInfo && (
+      <div className={styles.container}>
+        {users
+          .filter((user) => user._id !== userInfo.id)
+          .map((user) => (
+            <div key={user._id} className={styles.userBox}>
+              <Image
+                src={user.image}
+                className={utils.roundedImage}
+                alt="Profile"
+                layout="fixed"
+                width={75}
+                height={75}
+              />
+              <p>{user.name}</p>
+              <button>Request Friendship</button>
+            </div>
+          ))}
+      </div>
+    )
   );
 }

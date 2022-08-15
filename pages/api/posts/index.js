@@ -3,8 +3,6 @@ import connectDB from "../../../middleware/mongodb";
 
 async function handler(req, res) {
   const token = await getToken({ req });
-
-  console.log(token);
   const userId = token.uid || token.sub;
 
   try {
