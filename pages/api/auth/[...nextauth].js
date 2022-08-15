@@ -58,12 +58,14 @@ export default NextAuth({
       if (session?.user) {
         session.user.id = token.sub;
       }
+
       return session;
     },
     jwt: async ({ user, token }) => {
       if (user) {
         token.uid = user._id;
       }
+
       return token;
     },
   },

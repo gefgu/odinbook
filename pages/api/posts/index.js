@@ -4,7 +4,8 @@ import connectDB from "../../../middleware/mongodb";
 async function handler(req, res) {
   const token = await getToken({ req });
 
-  const userId = token.uid;
+  console.log(token);
+  const userId = token.uid || token.sub;
 
   try {
     const user = await req.models.User.findById(userId);
