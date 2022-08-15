@@ -11,18 +11,22 @@ export default function Dashboard() {
     required: true,
   });
   const userInfo = sessionData?.data?.user;
-  const { ...userListingData } = useSWR("/api/users", fetcher);
   const { ...friendshipRequestsData } = useSWR(
     "/api/users/friendshipRequests",
     fetcher
   );
+  const { ...userListingData } = useSWR("/api/users", fetcher);
 
   if (userListingData.error || friendshipRequestsData.error)
     return <div>Failed to load</div>;
   if (!userListingData.data || !friendshipRequestsData.data)
     return <div>Loading...</div>;
 
-  const users = userListingData.data.users;
+  const receivedRequests = friendshipRequestsData.data.receivedRequests;
+  const givenRequests = friendshipRequestsData.data.givenRequests;
+  const users = userListingData.data?.users.filter(
+    (user) => user._id !== userInfo.id
+  );
 
   const makeFriendshipRequest = async (userId) => {
     const data = { userToRequest: userId };
@@ -44,27 +48,62 @@ export default function Dashboard() {
     const result = await response.json();
   };
 
+  const mapUserListing = (user) => {
+    const userId = user._id;
+    if (receivedRequests.includes(userId)) {
+      return (
+        <div key={user._id} className={styles.userBox}>
+          <Image
+            src={user.image}
+            className={utils.roundedImage}
+            alt="Profile"
+            layout="fixed"
+            width={75}
+            height={75}
+          />
+          <p>{user.name}</p>
+          <button>Accept Friendship Request</button>
+        </div>
+      );
+    } else if (givenRequests.includes(userId)) {
+      return (
+        <div key={user._id} className={styles.userBox}>
+          <Image
+            src={user.image}
+            className={utils.roundedImage}
+            alt="Profile"
+            layout="fixed"
+            width={75}
+            height={75}
+          />
+          <p>{user.name}</p>
+          <button>Pending Friendship Request...</button>
+        </div>
+      );
+    } else {
+      return (
+        <div key={user._id} className={styles.userBox}>
+          <Image
+            src={user.image}
+            className={utils.roundedImage}
+            alt="Profile"
+            layout="fixed"
+            width={75}
+            height={75}
+          />
+          <p>{user.name}</p>
+          <button onClick={() => makeFriendshipRequest(user._id)}>
+            Request Friendship
+          </button>
+        </div>
+      );
+    }
+  };
+
   return (
     userInfo && (
       <div className={styles.container}>
-        {users
-          .filter((user) => user._id !== userInfo.id)
-          .map((user) => (
-            <div key={user._id} className={styles.userBox}>
-              <Image
-                src={user.image}
-                className={utils.roundedImage}
-                alt="Profile"
-                layout="fixed"
-                width={75}
-                height={75}
-              />
-              <p>{user.name}</p>
-              <button onClick={() => makeFriendshipRequest(user._id)}>
-                Request Friendship
-              </button>
-            </div>
-          ))}
+        {users.map((user) => mapUserListing(user))}
       </div>
     )
   );

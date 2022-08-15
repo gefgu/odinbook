@@ -7,10 +7,16 @@ async function handler(req, res) {
   try {
     if (req.method === "GET") {
       const userData = await req.models.User.findById(userId).exec();
+      let requestsOfFriendship = await req.models.User.find({
+        friendshipRequests: userId,
+      }).exec();
 
-      return res
-        .status(200)
-        .json({ friendshipRequests: userData.friendshipRequests });
+      requestsOfFriendship = requestsOfFriendship.map((user) => user._id);
+
+      return res.status(200).json({
+        receivedRequests: userData.friendshipRequests,
+        givenRequests: requestsOfFriendship,
+      });
     } else if (req.method === "POST") {
       const userToRequest = await req.models.User.findById(
         req.body.userToRequest
