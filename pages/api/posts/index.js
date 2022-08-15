@@ -4,7 +4,7 @@ import connectDB from "../../../middleware/mongodb";
 async function handler(req, res) {
   const token = await getToken({ req });
 
-  const userId = token.sub;
+  const userId = token.uid;
 
   try {
     const user = await req.models.User.findById(userId);
@@ -15,7 +15,9 @@ async function handler(req, res) {
 
       const posts = await req.models.Post.find({
         author: usersToCheck,
-      }).populate("author").sort("-creationDate");
+      })
+        .populate("author")
+        .sort("-creationDate");
 
       return res.status(200).json({ posts });
     } else if (req.method === "POST") {
