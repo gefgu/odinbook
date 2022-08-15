@@ -24,6 +24,26 @@ export default function Dashboard() {
 
   const users = userListingData.data.users;
 
+  const makeFriendshipRequest = async (userId) => {
+    const data = { userToRequest: userId };
+
+    const JSONdata = JSON.stringify(data);
+
+    const endpoint = `/api/users/friendshipRequests`;
+
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSONdata,
+    };
+
+    const response = await fetch(endpoint, options);
+
+    const result = await response.json();
+  };
+
   return (
     userInfo && (
       <div className={styles.container}>
@@ -40,7 +60,9 @@ export default function Dashboard() {
                 height={75}
               />
               <p>{user.name}</p>
-              <button>Request Friendship</button>
+              <button onClick={() => makeFriendshipRequest(user._id)}>
+                Request Friendship
+              </button>
             </div>
           ))}
       </div>

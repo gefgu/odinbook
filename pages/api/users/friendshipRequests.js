@@ -11,6 +11,17 @@ async function handler(req, res) {
       return res
         .status(200)
         .json({ friendshipRequests: userData.friendshipRequests });
+    } else if (req.method === "POST") {
+      const userToRequest = await req.models.User.findById(
+        req.body.userToRequest
+      );
+
+      userToRequest.friendshipRequests =
+        userToRequest.friendshipRequests.concat(userId);
+
+      await userToRequest.save();
+
+      return res.status(200).json({ message: "Ok" });
     }
   } catch (error) {
     return res.status(500).json({ error: error.message });
