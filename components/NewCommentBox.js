@@ -44,9 +44,7 @@ export default function NewCommentBox({ update, post }) {
           />
           <input
             name="content"
-            placeholder={`What's on your mind, ${
-              session?.user.name.split(" ")[0]
-            }?`}
+            placeholder={`What's on your mind, ${session?.user.name}?`}
             className={styles.textarea}
             type="text"
             required
