@@ -67,6 +67,27 @@ export default function Dashboard() {
     friendshipRequestsData.mutate();
   };
 
+  const acceptFriendshipRequest = async (userId) => {
+    const data = { userToBeFriend: userId };
+
+    const JSONdata = JSON.stringify(data);
+
+    const endpoint = `/api/users/friends`;
+
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSONdata,
+    };
+
+    const response = await fetch(endpoint, options);
+
+    const result = await response.json();
+    friendshipRequestsData.mutate();
+  };
+
   const mapUserListing = (user) => {
     const userId = user._id;
     if (receivedRequests.includes(userId)) {
@@ -81,7 +102,9 @@ export default function Dashboard() {
             height={75}
           />
           <p>{user.name}</p>
-          <button>Accept Friendship Request</button>
+          <button onClick={() => acceptFriendshipRequest(user._id)}>
+            Accept Friendship Request
+          </button>
         </div>
       );
     } else if (givenRequests.includes(userId)) {
