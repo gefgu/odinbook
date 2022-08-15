@@ -24,9 +24,6 @@ export default function Dashboard() {
 
   const receivedRequests = friendshipRequestsData.data.receivedRequests;
   const givenRequests = friendshipRequestsData.data.givenRequests;
-  const users = userListingData.data?.users.filter(
-    (user) => user._id !== userInfo.id
-  );
 
   const makeFriendshipRequest = async (userId) => {
     const data = { userToRequest: userId };
@@ -46,6 +43,7 @@ export default function Dashboard() {
     const response = await fetch(endpoint, options);
 
     const result = await response.json();
+    friendshipRequestsData.mutate();
   };
 
   const mapUserListing = (user) => {
@@ -100,11 +98,19 @@ export default function Dashboard() {
     }
   };
 
-  return (
-    userInfo && (
-      <div className={styles.container}>
-        {users.map((user) => mapUserListing(user))}
-      </div>
-    )
-  );
+  if (userInfo) {
+    const users = userListingData.data?.users.filter(
+      (user) => user._id !== userInfo.id
+    );
+
+    return (
+      userInfo && (
+        <div className={styles.container}>
+          {users.map((user) => mapUserListing(user))}
+        </div>
+      )
+    );
+  }
+
+  return <div>Failed to load</div>;
 }
