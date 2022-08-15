@@ -3,6 +3,11 @@ import useSWR from "swr";
 import utils from "../styles/utils.module.css";
 import styles from "../styles/UserListing.module.css";
 import { useSession } from "next-auth/react";
+import {
+  acceptFriendshipRequest,
+  makeFriendshipRequest,
+  removeFriendshipRequest,
+} from "../lib/helpers";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -25,69 +30,6 @@ export default function Dashboard() {
   const receivedRequests = friendshipRequestsData.data.receivedRequests;
   const givenRequests = friendshipRequestsData.data.givenRequests;
 
-  const makeFriendshipRequest = async (userId) => {
-    const data = { userToRequest: userId };
-
-    const JSONdata = JSON.stringify(data);
-
-    const endpoint = `/api/users/friendshipRequests`;
-
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSONdata,
-    };
-
-    const response = await fetch(endpoint, options);
-
-    const result = await response.json();
-    friendshipRequestsData.mutate();
-  };
-
-  const removeFriendshipRequest = async (userId) => {
-    const data = { userToRequest: userId };
-
-    const JSONdata = JSON.stringify(data);
-
-    const endpoint = `/api/users/friendshipRequests`;
-
-    const options = {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSONdata,
-    };
-
-    const response = await fetch(endpoint, options);
-
-    const result = await response.json();
-    friendshipRequestsData.mutate();
-  };
-
-  const acceptFriendshipRequest = async (userId) => {
-    const data = { userToBeFriend: userId };
-
-    const JSONdata = JSON.stringify(data);
-
-    const endpoint = `/api/users/friends`;
-
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSONdata,
-    };
-
-    const response = await fetch(endpoint, options);
-
-    const result = await response.json();
-    friendshipRequestsData.mutate();
-  };
-
   const mapUserListing = (user) => {
     const userId = user._id;
     if (receivedRequests.includes(userId)) {
@@ -102,7 +44,7 @@ export default function Dashboard() {
             height={75}
           />
           <p>{user.name}</p>
-          <button onClick={() => acceptFriendshipRequest(user._id)}>
+          <button onClick={() => acceptFriendshipRequest(user._id, friendshipRequestsData.mutate)}>
             Accept Friendship Request
           </button>
         </div>
@@ -119,7 +61,7 @@ export default function Dashboard() {
             height={75}
           />
           <p>{user.name}</p>
-          <button onClick={() => removeFriendshipRequest(user._id)}>
+          <button onClick={() => removeFriendshipRequest(user._id, friendshipRequestsData.mutate)}>
             Pending Friendship Request...
           </button>
         </div>
@@ -136,7 +78,7 @@ export default function Dashboard() {
             height={75}
           />
           <p>{user.name}</p>
-          <button onClick={() => makeFriendshipRequest(user._id)}>
+          <button onClick={() => makeFriendshipRequest(user._id, friendshipRequestsData.mutate)}>
             Request Friendship
           </button>
         </div>
