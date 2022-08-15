@@ -46,6 +46,27 @@ export default function Dashboard() {
     friendshipRequestsData.mutate();
   };
 
+  const removeFriendshipRequest = async (userId) => {
+    const data = { userToRequest: userId };
+
+    const JSONdata = JSON.stringify(data);
+
+    const endpoint = `/api/users/friendshipRequests`;
+
+    const options = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSONdata,
+    };
+
+    const response = await fetch(endpoint, options);
+
+    const result = await response.json();
+    friendshipRequestsData.mutate();
+  };
+
   const mapUserListing = (user) => {
     const userId = user._id;
     if (receivedRequests.includes(userId)) {
@@ -75,7 +96,9 @@ export default function Dashboard() {
             height={75}
           />
           <p>{user.name}</p>
-          <button>Pending Friendship Request...</button>
+          <button onClick={() => removeFriendshipRequest(user._id)}>
+            Pending Friendship Request...
+          </button>
         </div>
       );
     } else {

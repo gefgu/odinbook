@@ -28,6 +28,19 @@ async function handler(req, res) {
       await userToRequest.save();
 
       return res.status(200).json({ message: "Ok" });
+    } else if (req.method === "PUT") {
+      const userToRequest = await req.models.User.findById(
+        req.body.userToRequest
+      );
+
+      const index = userToRequest.friendshipRequests.indexOf(userId);
+      if (index > -1) {
+        userToRequest.friendshipRequests.splice(index, 1);
+      }
+
+      await userToRequest.save();
+
+      return res.status(200).json({ message: "Ok" });
     }
   } catch (error) {
     return res.status(500).json({ error: error.message });
