@@ -21,18 +21,28 @@ export default function Dashboard() {
     fetcher
   );
   const { ...userListingData } = useSWR("/api/users", fetcher);
+  const { ...friendsData } = useSWR("/api/users/friends", fetcher);
 
-  if (userListingData.error || friendshipRequestsData.error)
+  if (
+    userListingData.error ||
+    friendshipRequestsData.error ||
+    friendsData.error
+  )
     return <div>Failed to load</div>;
-  if (!userListingData.data || !friendshipRequestsData.data)
+  if (
+    !userListingData.data ||
+    !friendshipRequestsData.data ||
+    !friendsData.data
+  )
     return <div>Loading...</div>;
 
   const receivedRequests = friendshipRequestsData.data.receivedRequests;
   const givenRequests = friendshipRequestsData.data.givenRequests;
+  const friends = friendsData.data.friends;
 
   const mapUserListing = (user) => {
     const userId = user._id;
-    if (receivedRequests.includes(userId)) {
+    if (friends.includes(userId)) {
       return (
         <div key={user._id} className={styles.userBox}>
           <Image
@@ -44,7 +54,26 @@ export default function Dashboard() {
             height={75}
           />
           <p>{user.name}</p>
-          <button onClick={() => acceptFriendshipRequest(user._id, friendshipRequestsData.mutate)}>
+          <button>Friends</button>
+        </div>
+      );
+    } else if (receivedRequests.includes(userId)) {
+      return (
+        <div key={user._id} className={styles.userBox}>
+          <Image
+            src={user.image}
+            className={utils.roundedImage}
+            alt="Profile"
+            layout="fixed"
+            width={75}
+            height={75}
+          />
+          <p>{user.name}</p>
+          <button
+            onClick={() =>
+              acceptFriendshipRequest(user._id, friendsData.mutate)
+            }
+          >
             Accept Friendship Request
           </button>
         </div>
@@ -61,7 +90,11 @@ export default function Dashboard() {
             height={75}
           />
           <p>{user.name}</p>
-          <button onClick={() => removeFriendshipRequest(user._id, friendshipRequestsData.mutate)}>
+          <button
+            onClick={() =>
+              removeFriendshipRequest(user._id, friendshipRequestsData.mutate)
+            }
+          >
             Pending Friendship Request...
           </button>
         </div>
@@ -78,7 +111,11 @@ export default function Dashboard() {
             height={75}
           />
           <p>{user.name}</p>
-          <button onClick={() => makeFriendshipRequest(user._id, friendshipRequestsData.mutate)}>
+          <button
+            onClick={() =>
+              makeFriendshipRequest(user._id, friendshipRequestsData.mutate)
+            }
+          >
             Request Friendship
           </button>
         </div>
