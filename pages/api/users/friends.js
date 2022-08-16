@@ -31,6 +31,23 @@ async function handler(req, res) {
 
       return res.status(200).json({ message: "Ok" });
     } else if (req.method === "PUT") {
+      const loggedUser = await req.models.User.findById(userId).exec();
+      const friendUser = await req.models.User.findById(
+        req.body.friendUser
+      ).exec();
+
+      let index = loggedUser.friends.indexOf(req.body.friendUser);
+      if (index > -1) {
+        loggedUser.friends.splice(index, 1);
+      }
+      index = friendUser.friends.indexOf(userId);
+      if (index > -1) {
+        friendUser.friends.splice(index, 1);
+      }
+
+      await loggedUser.save();
+      await friendUser.save();
+
       return res.status(200).json({ message: "Ok" });
     }
   } catch (error) {

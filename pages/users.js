@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import {
   acceptFriendshipRequest,
   makeFriendshipRequest,
+  removeFriendship,
   removeFriendshipRequest,
 } from "../lib/helpers";
 
@@ -54,7 +55,16 @@ export default function Dashboard() {
             height={75}
           />
           <p>{user.name}</p>
-          <button>Friends</button>
+          <button
+            onClick={() =>
+              removeFriendship(user._id, () => {
+                friendsData.mutate();
+                friendshipRequestsData.mutate();
+              })
+            }
+          >
+            Friends
+          </button>
         </div>
       );
     } else if (receivedRequests.includes(userId)) {
