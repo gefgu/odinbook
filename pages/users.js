@@ -55,7 +55,7 @@ export default function Dashboard() {
             height={75}
           />
           <p>{user.name}</p>
-          <button
+          <button className={styles.warning}
             onClick={() =>
               removeFriendship(user._id, () => {
                 friendsData.mutate();
@@ -100,7 +100,7 @@ export default function Dashboard() {
             height={75}
           />
           <p>{user.name}</p>
-          <button
+          <button className={styles.warning}
             onClick={() =>
               removeFriendshipRequest(user._id, friendshipRequestsData.mutate)
             }

@@ -43,3 +43,11 @@
 .userBox button:active {
   background-color: #00479e;
 }
+
+.userBox .warning:hover {
+  background-color: rgb(185, 28, 28);
+}
+
+.userBox .warning:active {
+  background-color: rgb(153, 27, 27);
+}
