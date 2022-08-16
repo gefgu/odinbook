@@ -7,11 +7,16 @@ import styles from "../styles/navbar.module.css";
 import Link from "next/link";
 import { useState } from "react";
 import utils from "../styles/utils.module.css";
+import { useRouter } from "next/router";
 
 export default function NavBar() {
   const { data: session } = useSession();
 
   const [showDropbox, setShowDropbox] = useState(false);
+
+  const router = useRouter();
+
+  console.log();
 
   return (
     session && (
@@ -27,14 +32,14 @@ export default function NavBar() {
           <ul className={styles.list}>
             <Link href={"/dashboard"}>
               <li>
-                <button className={styles.active}>
+                <button className={router.pathname === "/dashboard" ? styles.active : ""}>
                   <Image src={home} alt="Home Page" width={40} height={40} />
                 </button>
               </li>
             </Link>
             <Link href={"/users"}>
               <li>
-                <button>
+                <button className={router.pathname === "/users" ? styles.active : ""}>
                   <Image src={people} alt="Friends" width={40} height={40} />
                 </button>
               </li>
