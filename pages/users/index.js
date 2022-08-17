@@ -9,6 +9,7 @@ import {
   removeFriendship,
   removeFriendshipRequest,
 } from "../../lib/helpers";
+import Link from "next/link";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -54,8 +55,11 @@ export default function Dashboard() {
             width={75}
             height={75}
           />
-          <p>{user.name}</p>
-          <button className={styles.warning}
+          <Link href={`/users/${user._id}`}>
+            <p>{user.name}</p>
+          </Link>
+          <button
+            className={styles.warning}
             onClick={() =>
               removeFriendship(user._id, () => {
                 friendsData.mutate();
@@ -78,7 +82,9 @@ export default function Dashboard() {
             width={75}
             height={75}
           />
-          <p>{user.name}</p>
+          <Link href={`/users/${user._id}`}>
+            <p>{user.name}</p>
+          </Link>
           <button
             onClick={() =>
               acceptFriendshipRequest(user._id, friendsData.mutate)
@@ -99,8 +105,11 @@ export default function Dashboard() {
             width={75}
             height={75}
           />
-          <p>{user.name}</p>
-          <button className={styles.warning}
+          <Link href={`/users/${user._id}`}>
+            <p>{user.name}</p>
+          </Link>
+          <button
+            className={styles.warning}
             onClick={() =>
               removeFriendshipRequest(user._id, friendshipRequestsData.mutate)
             }
@@ -120,7 +129,9 @@ export default function Dashboard() {
             width={75}
             height={75}
           />
-          <p>{user.name}</p>
+          <Link href={`/users/${user._id}`}>
+            <p>{user.name}</p>
+          </Link>
           <button
             onClick={() =>
               makeFriendshipRequest(user._id, friendshipRequestsData.mutate)

@@ -25,6 +25,7 @@
 .userBox p {
   font-size: 1rem;
   text-align: center;
+  cursor: pointer;
 }
 
 .userBox button {

@@ -19,3 +19,7 @@
   line-height: 1.4;
 }
 
+.container strong {
+  cursor: pointer;
+}
+

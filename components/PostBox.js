@@ -4,6 +4,7 @@ import utils from "../styles/utils.module.css";
 import styles from "../styles/PostBox.module.css";
 import LikeBox from "./LikeBox";
 import CommentBox from "./CommentBox";
+import Link from "next/link";
 
 export default function PostBox({ post, update }) {
   post.sinceCreation = getSinceDateUntilNow(post.creationDate);
@@ -20,7 +21,10 @@ export default function PostBox({ post, update }) {
           height={50}
         />
         <div>
-          <strong>{post.author.name}</strong> posted.
+          <Link href={`/users/${post.author._id}`}>
+            <strong>{post.author.name}</strong>
+          </Link>{" "}
+          posted.
           <p>{post.sinceCreation}</p>
         </div>
       </div>
@@ -32,7 +36,7 @@ export default function PostBox({ post, update }) {
       {post.likes.length === 1 && <p>{post.likes.length} Like</p>}
       {post.likes.length > 1 && <p>{post.likes.length} Likes</p>}
       <LikeBox post={post} update={update} />
-      <CommentBox post={post}/>
+      <CommentBox post={post} />
     </div>
   );
 }
