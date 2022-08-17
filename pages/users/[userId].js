@@ -12,7 +12,7 @@ export default function UserPage() {
   const { userId } = router.query;
 
   const { ...userData } = useSWR(`/api/users/${userId}`, fetcher);
-  const { ...postsData } = useSWR("/api/posts", fetcher);
+  const { ...postsData } = useSWR(`/api/posts/user/${userId}`, fetcher);
 
   if (userData.error || postsData.error) return <div>Failed to load</div>;
   if (!userData.data || !postsData.data) return <div>Loading...</div>;
