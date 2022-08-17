@@ -1,14 +1,14 @@
 import Image from "next/image";
 import useSWR from "swr";
-import utils from "../styles/utils.module.css";
-import styles from "../styles/UserListing.module.css";
+import utils from "../../styles/utils.module.css";
+import styles from "../../styles/UserListing.module.css";
 import { useSession } from "next-auth/react";
 import {
   acceptFriendshipRequest,
   makeFriendshipRequest,
   removeFriendship,
   removeFriendshipRequest,
-} from "../lib/helpers";
+} from "../../lib/helpers";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
