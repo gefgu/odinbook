@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import PostsListing from "../../components/PostsListing";
 import styles from "../../styles/UserPage.module.css";
 import utils from "../../styles/utils.module.css";
 
@@ -10,12 +11,13 @@ export default function UserPage() {
   const router = useRouter();
   const { userId } = router.query;
 
-  const { data, error } = useSWR(`/api/users/${userId}`, fetcher);
+  const { ...userData } = useSWR(`/api/users/${userId}`, fetcher);
+  const { ...postsData } = useSWR("/api/posts", fetcher);
 
-  if (error) return <div>Failed to load</div>;
-  if (!data) return <div>Loading...</div>;
+  if (userData.error || postsData.error) return <div>Failed to load</div>;
+  if (!userData.data || !postsData.data) return <div>Loading...</div>;
 
-  const user = data?.user;
+  const user = userData.data?.user;
 
   return (
     user && (
@@ -31,6 +33,12 @@ export default function UserPage() {
           />
           <h1>{user.name}</h1>
         </div>
+        {postsData.data?.posts && (
+          <PostsListing
+            posts={postsData.data?.posts}
+            update={postsData.mutate}
+          />
+        )}
       </div>
     )
   );
