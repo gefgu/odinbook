@@ -6,9 +6,27 @@
 }
 
 .horizontalCenter {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto 1fr;
   align-items: center;
   gap: 12px;
+}
+
+.trash {
+  justify-self: end;
+  padding: 8px 12px;
+  display: flex;
+  justify-content: center;
+  border: none;
+  border-radius: 8px;
+}
+
+.trash:hover {
+  background-color: rgb(239, 68, 68);
+}
+
+.trash:active {
+  background-color: rgb(220, 38, 38);
 }
 
 .horizontalCenter p {
@@ -22,4 +40,3 @@
 .container strong {
   cursor: pointer;
 }
-

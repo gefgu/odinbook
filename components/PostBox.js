@@ -5,9 +5,14 @@ import styles from "../styles/PostBox.module.css";
 import LikeBox from "./LikeBox";
 import CommentBox from "./CommentBox";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import trash from "../public/trash-solid.svg";
 
 export default function PostBox({ post, update }) {
   post.sinceCreation = getSinceDateUntilNow(post.creationDate);
+  const { data: session } = useSession();
+
+  const userIsAuthor = post.author._id === session.user.id;
 
   return (
     <div className={styles.container}>
@@ -27,6 +32,17 @@ export default function PostBox({ post, update }) {
           posted.
           <p>{post.sinceCreation}</p>
         </div>
+        {userIsAuthor && (
+          <button className={styles.trash}>
+            <Image
+              src={trash}
+              alt="Profile"
+              layout="fixed"
+              width={20}
+              height={20}
+            />
+          </button>
+        )}
       </div>
       <div>
         {post.content.split("\n").map((paragraph, index) => (

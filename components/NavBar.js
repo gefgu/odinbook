@@ -16,8 +16,6 @@ export default function NavBar() {
 
   const router = useRouter();
 
-  console.log();
-
   return (
     session && (
       <header className={styles.container}>
