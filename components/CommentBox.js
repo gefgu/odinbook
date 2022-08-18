@@ -4,6 +4,7 @@ import NewCommentBox from "./NewCommentBox";
 import utils from "../styles/utils.module.css";
 import styles from "../styles/CommentBox.module.css";
 import { getSinceDateUntilNow } from "../lib/helpers";
+import Link from "next/link";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -35,7 +36,9 @@ export default function CommentBox({ post }) {
               />
               <div className={styles.comment}>
                 <div className={styles.content}>
-                  <strong>{comment.author.name}</strong>
+                  <Link href={`/users/${comment.author._id}`}>
+                    <strong>{comment.author.name}</strong>
+                  </Link>{" "}
                   <p>{comment.content}</p>
                 </div>
                 <p className={styles.date}>{comment.sinceCreation}</p>
