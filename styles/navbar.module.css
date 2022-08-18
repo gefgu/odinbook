@@ -45,7 +45,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  width: 96px;
+  width: 128px;
 }
 
 .imageBox .imageButton {
@@ -73,10 +73,14 @@
   display: flex;
   padding: 16px 8px;
   background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .dropbox button {
   width: 100%;
-  padding: 4px;
+  padding: 8px;
   border-radius: 8px;
+  border: 1px solid grey;
 }

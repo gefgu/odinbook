@@ -72,6 +72,9 @@ export default function NavBar() {
           <div
             className={`${styles.dropbox} ${showDropbox ? "" : styles.hidden}`}
           >
+            <Link href={`/users/${session?.user.id}`}>
+              <button>My Page</button>
+            </Link>
             <button onClick={() => signOut()}>Sign out</button>
           </div>
         </div>
