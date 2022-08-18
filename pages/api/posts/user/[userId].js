@@ -5,9 +5,9 @@ async function handler(req, res) {
 
   try {
     if (req.method === "GET") {
-      const posts = await req.models.Post.find({ author: userId }).populate(
-        "author"
-      );
+      const posts = await req.models.Post.find({ author: userId })
+        .populate("author")
+        .sort("-creationDate");
 
       return res.status(200).json({ posts });
     }
