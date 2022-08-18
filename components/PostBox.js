@@ -14,6 +14,19 @@ export default function PostBox({ post, update }) {
 
   const userIsAuthor = post.author._id === session.user.id;
 
+  const handleDeletion = async (event) => {
+    event.preventDefault();
+
+    const endpoint = `/api/posts/${post._id}`;
+
+    const options = { method: "DELETE" };
+
+    const response = await fetch(endpoint, options);
+
+    const result = await response.json();
+    update();
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.horizontalCenter}>
@@ -33,7 +46,7 @@ export default function PostBox({ post, update }) {
           <p>{post.sinceCreation}</p>
         </div>
         {userIsAuthor && (
-          <button className={styles.trash}>
+          <button className={styles.trash} onClick={handleDeletion}>
             <Image
               src={trash}
               alt="Profile"
