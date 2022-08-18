@@ -21,25 +21,34 @@ export default function NavBar() {
   return (
     session && (
       <header className={styles.container}>
-        <Image
-          src={odin}
-          alt="Odin Logo"
-          layout="fixed"
-          height={50}
-          width={50}
-        />
+        <Link href={"/dashboard"}>
+          <Image
+            src={odin}
+            alt="Odin Logo"
+            layout="fixed"
+            height={50}
+            width={50}
+            className={styles.odin}
+          />
+        </Link>
         <nav>
           <ul className={styles.list}>
             <Link href={"/dashboard"}>
               <li>
-                <button className={router.pathname === "/dashboard" ? styles.active : ""}>
+                <button
+                  className={
+                    router.pathname === "/dashboard" ? styles.active : ""
+                  }
+                >
                   <Image src={home} alt="Home Page" width={40} height={40} />
                 </button>
               </li>
             </Link>
             <Link href={"/users"}>
               <li>
-                <button className={router.pathname === "/users" ? styles.active : ""}>
+                <button
+                  className={router.pathname === "/users" ? styles.active : ""}
+                >
                   <Image src={people} alt="Friends" width={40} height={40} />
                 </button>
               </li>
