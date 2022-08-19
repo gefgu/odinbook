@@ -15,6 +15,7 @@
   list-style: none;
   gap: 16px;
   margin: 0;
+  padding: 0;
 }
 
 .list button {
@@ -77,6 +78,7 @@
   flex-direction: column;
   gap: 16px;
   box-shadow: 2px 4px 4px -1px rgba(0, 0, 0, 0.35);
+  z-index: 10;
 }
 
 .dropbox button {
@@ -84,4 +86,13 @@
   padding: 8px;
   border-radius: 8px;
   border: 1px solid grey;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 8px 36px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 32px;
+  }
 }
