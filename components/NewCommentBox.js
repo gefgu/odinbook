@@ -40,7 +40,7 @@ export default function NewCommentBox({ update, post }) {
             alt="Profile"
             layout="fixed"
             width={50}
-            height={40}
+            height={50}
           />
           <input
             name="content"
