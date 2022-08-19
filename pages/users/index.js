@@ -58,6 +58,7 @@ export default function Dashboard() {
           <Link href={`/users/${user._id}`}>
             <p>{user.name}</p>
           </Link>
+          Friends
           <button
             className={styles.warning}
             onClick={() =>
@@ -67,7 +68,7 @@ export default function Dashboard() {
               })
             }
           >
-            Friends
+            Cancel Friendship
           </button>
         </div>
       );
@@ -92,6 +93,14 @@ export default function Dashboard() {
           >
             Accept Friendship Request
           </button>
+          <button
+            className={styles.warning}
+            onClick={() =>
+              acceptFriendshipRequest(user._id, friendsData.mutate)
+            }
+          >
+            Cancel Friendship Request
+          </button>
         </div>
       );
     } else if (givenRequests.includes(userId)) {
@@ -108,13 +117,14 @@ export default function Dashboard() {
           <Link href={`/users/${user._id}`}>
             <p>{user.name}</p>
           </Link>
+          <p>Pending Friendship Request...</p>
           <button
             className={styles.warning}
             onClick={() =>
               removeFriendshipRequest(user._id, friendshipRequestsData.mutate)
             }
           >
-            Pending Friendship Request...
+            Cancel
           </button>
         </div>
       );

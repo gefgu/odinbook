@@ -46,6 +46,10 @@
   background-color: #00479e;
 }
 
+.userBox .warning {
+  background-color: rgb(220, 38, 38);
+}
+
 .userBox .warning:hover {
   background-color: rgb(185, 28, 28);
 }
