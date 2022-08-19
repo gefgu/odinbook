@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import {
   acceptFriendshipRequest,
   makeFriendshipRequest,
+  rejectFriendshipRequest,
   removeFriendship,
   removeFriendshipRequest,
 } from "../../lib/helpers";
@@ -96,10 +97,10 @@ export default function Dashboard() {
           <button
             className={styles.warning}
             onClick={() =>
-              acceptFriendshipRequest(user._id, friendsData.mutate)
+              rejectFriendshipRequest(user._id, friendshipRequestsData.mutate)
             }
           >
-            Cancel Friendship Request
+            Reject Friendship Request
           </button>
         </div>
       );

@@ -41,6 +41,19 @@ async function handler(req, res) {
       await userToRequest.save();
 
       return res.status(200).json({ message: "Ok" });
+    } else if (req.method === "DELETE") {
+      const loggedUser = await req.models.User.findById(userId);
+
+      const index = loggedUser.friendshipRequests.indexOf(
+        req.body.userToReject
+      );
+      if (index > -1) {
+        loggedUser.friendshipRequests.splice(index, 1);
+      }
+
+      await loggedUser.save();
+
+      return res.status(200).json({ message: "Ok" });
     }
   } catch (error) {
     return res.status(500).json({ error: error.message });
