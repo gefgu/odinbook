@@ -52,3 +52,13 @@
 .userBox .warning:active {
   background-color: rgb(153, 27, 27);
 }
+
+@media (max-width: 600px) {
+  .container .userBox {
+    flex-direction: column;
+  }
+
+  .container {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
