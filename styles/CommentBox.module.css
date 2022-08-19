@@ -18,6 +18,12 @@
   text-align: justify;
 }
 
+.content .heading {
+  display: flex;
+  justify-content: space-between;
+  /* align-items: center; */
+}
+
 .content p {
   margin: 4px 0;
 }
@@ -31,4 +37,22 @@
   align-self: flex-end;
   font-size: 0.9rem;
   margin: 0;
+}
+
+.trash {
+  padding: 8px 12px;
+  display: flex;
+  justify-content: center;
+  border: none;
+  border-radius: 8px;
+  margin-top: -4px;
+  margin-bottom: -8px;
+}
+
+.trash:hover {
+  background-color: rgb(239, 68, 68);
+}
+
+.trash:active {
+  background-color: rgb(220, 38, 38);
 }

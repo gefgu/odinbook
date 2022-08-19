@@ -12,7 +12,7 @@ export default function PostBox({ post, update }) {
   post.sinceCreation = getSinceDateUntilNow(post.creationDate);
   const { data: session } = useSession();
 
-  const userIsAuthor = post.author._id === session.user.id;
+  const userIsAuthor = post.author._id === session?.user.id;
 
   const handleDeletion = async (event) => {
     event.preventDefault();
