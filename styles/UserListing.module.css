@@ -13,9 +13,10 @@
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.25);
   border: 1px solid rgba(0, 0, 0, 0.1);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: 16px;
 }
 
 .userBox button {
@@ -54,11 +55,7 @@
 }
 
 @media (max-width: 600px) {
-  .container .userBox {
-    flex-direction: column;
-  }
-
   .container {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: 1fr;
   }
 }
