@@ -1,5 +1,5 @@
 import { getToken } from "next-auth/jwt";
-import connectDB from "../../../../middleware/mongodb";
+import connectDB from "../../../../../middleware/mongodb";
 
 async function handler(req, res) {
   const token = await getToken({ req });
