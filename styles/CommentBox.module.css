@@ -56,3 +56,14 @@
 .trash:active {
   background-color: rgb(220, 38, 38);
 }
+
+@media (max-width: 600px) {
+  .commentBox {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .content {
+    margin: 0;
+  }
+}
