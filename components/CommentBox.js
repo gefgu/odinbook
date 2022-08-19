@@ -23,10 +23,10 @@ export default function CommentBox({ post }) {
 
   const comments = data.comments;
 
-  const handleDeletion = async (event) => {
+  const handleDeletion = async (event, id) => {
     event.preventDefault();
 
-    // const endpoint = `/api/posts/${post._id}`;
+    const endpoint = `/api/posts/${post._id}/comments/${id}`;
 
     const options = { method: "DELETE" };
 
@@ -60,7 +60,12 @@ export default function CommentBox({ post }) {
                       <strong>{comment.author.name}</strong>
                     </Link>{" "}
                     {userIsAuthor && (
-                      <button className={styles.trash} onClick={handleDeletion}>
+                      <button
+                        className={styles.trash}
+                        onClick={(event, id) =>
+                          handleDeletion(event, comment._id)
+                        }
+                      >
                         <Image
                           src={trash}
                           alt="Profile"
