@@ -7,6 +7,7 @@ import { getSinceDateUntilNow } from "../lib/helpers";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import trash from "../public/trash-solid.svg";
+import Loading from "./Loading";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -19,7 +20,7 @@ export default function CommentBox({ post }) {
   );
 
   if (error) return <div>Failed to load</div>;
-  if (!data) return <div>Loading...</div>;
+  if (!data) return <Loading />;
 
   const comments = data.comments;
 

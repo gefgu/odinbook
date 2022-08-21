@@ -11,6 +11,7 @@ import {
   removeFriendshipRequest,
 } from "../../lib/helpers";
 import Link from "next/link";
+import Loading from "../../components/Loading";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -37,7 +38,7 @@ export default function Dashboard() {
     !friendshipRequestsData.data ||
     !friendsData.data
   )
-    return <div>Loading...</div>;
+    return <Loading />;
 
   const receivedRequests = friendshipRequestsData.data.receivedRequests;
   const givenRequests = friendshipRequestsData.data.givenRequests;

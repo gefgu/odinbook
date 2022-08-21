@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import Loading from "../../components/Loading";
 import PostsListing from "../../components/PostsListing";
 import styles from "../../styles/UserPage.module.css";
 import utils from "../../styles/utils.module.css";
@@ -15,7 +16,7 @@ export default function UserPage() {
   const { ...postsData } = useSWR(`/api/posts/user/${userId}`, fetcher);
 
   if (userData.error || postsData.error) return <div>Failed to load</div>;
-  if (!userData.data || !postsData.data) return <div>Loading...</div>;
+  if (!userData.data || !postsData.data) return <Loading />;
 
   const user = userData.data?.user;
 
