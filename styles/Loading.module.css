@@ -1,6 +1,8 @@
 .container {
-  position: absolute;
+  width: 80px;
+  height: 80px;
   margin: 0 auto;
+  z-index: 20;
 }
 
 .ldsRing {
@@ -8,6 +10,8 @@
   position: relative;
   width: 80px;
   height: 80px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .ldsRing div {
   box-sizing: border-box;
