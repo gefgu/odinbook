@@ -13,7 +13,9 @@
 }
 
 .flex {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  justify-items: center;
   gap: 16px;
 }
 
@@ -53,3 +55,9 @@
   background-color: #0056be;
 }
 
+@media (max-width: 600px) {
+  .flex {
+    display: grid;
+    grid-template-columns: auto;
+  }
+}
