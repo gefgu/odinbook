@@ -43,7 +43,6 @@ export default NextAuth({
       },
     }),
   ],
-  debug: true,
   adapter: MongoDBAdapter(clientPromise),
   session: { strategy: "jwt" },
   pages: {
