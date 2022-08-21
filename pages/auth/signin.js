@@ -1,8 +1,16 @@
-import { getProviders, signIn } from "next-auth/react";
+import { getProviders, signIn, useSession } from "next-auth/react";
+import { Router, useRouter } from "next/router";
 import HeadData from "../../components/HeadData";
 import styles from "../../styles/signin.module.css";
 
 export default function SignIn({ providers }) {
+  const { status } = useSession();
+  const router = useRouter();
+
+  if (status === "authenticated") {
+    router.replace("/dashboard")
+  }
+
   const facebook = providers.facebook;
   const credentials = providers.credentials;
 
