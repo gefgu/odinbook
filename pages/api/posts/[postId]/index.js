@@ -3,7 +3,7 @@ import connectDB from "../../../../middleware/mongodb";
 
 async function handler(req, res) {
   const token = await getToken({ req });
-  const userId = token.uid || token.sub;
+  const userId = token?.uid || token.sub;
   const { postId } = req.query;
 
   try {
